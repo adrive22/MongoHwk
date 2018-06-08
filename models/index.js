@@ -3,5 +3,6 @@
 
 module.exports={
     Article: require("./Article"),
-    Comments: require("./Comments")
+    Comments: require("./Comments"),
+    Saved: require("./Saved")
 };

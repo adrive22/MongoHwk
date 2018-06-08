@@ -1,3 +1,39 @@
 .display-4, .lead{
     text-align:center;
+    
+}
+
+/* .articlesHeadlines{
+    border-width: 2px;
+    border-style: solid;
+} */
+
+.articlesHeadlines{
+    position: relative;
+    margin-left:5%;
+    margin-right:5%;
+
+}
+
+.testBtn{
+    position:relative;
+    float:right;
+    margin-right: 20%;
+}
+
+.articlesHeadlines p{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #cdcdcd;
+    background-color: gray;
+}
+
+.title{
+    font-weight: bold;
+}
+
+.articlesHeadlines button{
+    position: relative;
+    margin-top: none;
+    margin-left: 20px;
 }

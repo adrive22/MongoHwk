@@ -32,6 +32,8 @@ mongoose.connect(MONGODB_URI);
 
 
 
+
+
 //GET route for scraping npr
 app.get("/scrape", function(req, res) {
     request("https://www.npr.org/sections/news/", function(error, response, html){
@@ -56,37 +58,6 @@ app.get("/scrape", function(req, res) {
             return res.json(err);
         });
     });
-
-
-//             var title = $(element).children("a").text();
-//             var link = $(element).children("a").attr("href");
-        
-
-//             //console the results to check class
-//             console.log(title);
-//             console.log(link);
-      
-        
-//         //if this found element had both a title and a link
-//         if (title && link){
-//             //insert the data in the scrapedData database
-//         }
-//         db.scrapedData.insert({
-//             title: title,
-//             link: link
-//         },
-//         //log the error if there is one or log the inserted data
-//         function(err, inserted){
-//             if (err){
-//                 console.log(err);
-//             }
-//             else{
-//                 console.log(inserted);
-
-//             }
-//             });
-        
-//         });
     
  });
 
@@ -108,10 +79,30 @@ app.get("/all", function(req,res) {
     })
 });
 
-   
+
+
+app.post("/saved", function(req,res){ 
+    db.Saved.create(req.body)
+        .then(function(dbSaved) {
+            console.log(dbSaved);
+        })
+        .catch(function(err){
+            return res.json(err);
+        });
+});
 
 
 
+app.get("/saved", function(req, res){
+    db.Saved.find({})
+    .then(function(dbSaved){
+        res.json(dbSaved);
+    })
+    .catch(function(err){
+        res.json(err);
+    })
+});
+    
 
 app.listen(3000, function(){
     console.log("App running on port 3000!");
