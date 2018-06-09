@@ -1,49 +1,70 @@
-var empty= function(){
-$(".articlesHeadlines").empty();
-}
-empty();
-
+// var empty = function(){
+    
+//     $(".articlesHeadlines").empty();
+// empty();
+// }
 
 //Grab the articles as a json   
+
+$(".getHeadlines").click(function(req, res){
+
+   
+
+    $.get("/scrape", function(){
+        req.body
+    })
+
+    
+
+
 $.getJSON("/all", function(data) {
 
    // for each one
-    for (var i = 0; i < 25; i++) {
+    for (var i = 0; i < data.length; i++) {
 
 
 
-   $(".articlesHeadlines").append("<p><span class='title'>" + data[i].title + "</span><button type='button'" + "class='btn btn-primary testBtn'" + "data-toggle='modal'" + "data-target='#exampleModal'"+"</button>" + "</p>");
+   $(".articlesHeadlines").append("<p><span" + "class='title'>" + data[i].title + "</span><button type='button'" + "class='btn btn-info testBtn'" + "href="+ data[i].link + "</button>" + "</p>");
   
-   $(".testBtn").text("Save Article").attr("href", data[i].link).attr("value", data[i].title)
+   $(".testBtn").text("Save Link").attr("data-id", data[i]._id);
+    
     }
 
 
 
-   $(".testBtn").click(function(){
 
-    var title = $(".testBtn").val();
-    console.log(title);
-    var link = $(".testBtn").attr("href");
+   $(".testBtn").click(function(){
+    var link=$(".testBtn").attr("href");
     console.log(link);
+    
+    
 
     $.ajax({
         type:"POST",
         url:"/saved",
         data:{
-            title: title,
             link: link
         }
-    });
     
-
-   
-
-
-
-     
-
-
-
-
     })
 });
+});
+});
+
+$(".savedArticlesBtn").click(function(){
+    $.getJSON("/saved", function(data){
+        for (var i = 0; i < data.length; i++) {
+
+        $(".savedArticlesHtml").append("<p>" + data[i].link + "</p>");
+        }
+    })
+
+       
+
+    })
+
+
+
+
+
+

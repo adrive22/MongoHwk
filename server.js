@@ -35,7 +35,15 @@ mongoose.connect(MONGODB_URI);
 
 
 //GET route for scraping npr
-app.get("/scrape", function(req, res) {
+
+
+
+
+   
+app.get("/scrape", function(req,res) {
+
+
+    
     request("https://www.npr.org/sections/news/", function(error, response, html){
         console.log(html);
         //set up cheerio request for the html into a variable
@@ -50,12 +58,15 @@ app.get("/scrape", function(req, res) {
         result.title = $(this).children("a").text();
         result.link = $(this).children("a").attr("href");
 
+        
+        
         db.Article.create(result)
         .then(function(dbArticle) {
             console.log(dbArticle);
         })
         .catch(function(err){
             return res.json(err);
+        
         });
     });
     
@@ -63,7 +74,6 @@ app.get("/scrape", function(req, res) {
 
 res.send("scrape complete");
 });
-
 
 
 //retrieve data from the database
